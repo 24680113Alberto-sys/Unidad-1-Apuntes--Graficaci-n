@@ -180,10 +180,13 @@ Copiar el siguiente código en el Script Editor de Blender (Scripting workspace)
 
 
 
-import bpy
-import math
-def crear_poligono_2d(nombre, lados, radio):
+
+    import bpy
+    import math
+
+    def crear_poligono_2d(nombre, lados, radio):
     """
+    
     Crea un polígono regular plano en el origen (0,0,0).
     Parámetros:
       - nombre: Nombre del objeto en Blender.
@@ -204,11 +207,12 @@ def crear_poligono_2d(nombre, lados, radio):
         aristas.append((i, (i + 1) % lados))
     malla.from_pydata(vertices, aristas, [])
     malla.update()
-LIMPIEZA DE ESCENA
-bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete() 
-LLAMADA A LA FUNCIÓN
-crear_poligono_2d("Poligono2D", lados=6, radio=5) 
+    
+    LIMPIEZA DE ESCENA
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete() 
+    LLAMADA A LA FUNCIÓN
+    crear_poligono_2d("Poligono2D", lados=6, radio=5) 
 <img width="840" height="540" alt="image" src="https://github.com/user-attachments/assets/340001e0-3dda-49ae-b522-d759ca55a911" />
 
 
@@ -230,18 +234,18 @@ Código: Flor de la Vida
 Ejecutar en el Script Editor de Blender:
 
 
-import bpy
-import math
-Limpiar escena
-bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete() 
-Parámetros de la figura
-radio = 3
-angulo_actual = 0
-paso_angular = 30  # Cada 30 grados para 12 círculos
- 1. Círculo Central
-bpy.ops.mesh.primitive_circle_add(radius=radio, location=(0, 0, 0), vertices=64)
-while angulo_actual < 360:
+    import bpy
+    import math
+    Limpiar escena
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete() 
+    Parámetros de la figura
+    radio = 3
+    angulo_actual = 0
+    paso_angular = 30  # Cada 30 grados para 12 círculos
+     1. Círculo Central
+    bpy.ops.mesh.primitive_circle_add(radius=radio, location=(0, 0, 0), vertices=64)
+    while angulo_actual < 360:
     x = radio * math.cos(math.radians(angulo_actual))
     y = radio * math.sin(math.radians(angulo_actual))
     bpy.ops.mesh.primitive_circle_add(radius=radio, location=(x, y, 0), vertices=64)
