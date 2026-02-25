@@ -178,9 +178,10 @@ El script utiliza la API bpy de Blender para crear una malla vacía y poblarla c
 Código: Polígono Regular
 Copiar el siguiente código en el Script Editor de Blender (Scripting workspace) y ejecutar con Run Script o Alt+P:
 
+
+
 import bpy
 import math
- 
 def crear_poligono_2d(nombre, lados, radio):
     """
     Crea un polígono regular plano en el origen (0,0,0).
@@ -194,25 +195,20 @@ def crear_poligono_2d(nombre, lados, radio):
     bpy.context.collection.objects.link(objeto)
     vertices = []
     aristas = []
- 
     for i in range(lados):
         angulo = 2 * math.pi * i / lados
         x = radio * math.cos(angulo)
         y = radio * math.sin(angulo)
         vertices.append((x, y, 0))
- 
     for i in range(lados):
         aristas.append((i, (i + 1) % lados))
- 
     malla.from_pydata(vertices, aristas, [])
     malla.update()
- 
-# LIMPIEZA DE ESCENA
+LIMPIEZA DE ESCENA
 bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete()
- 
-# LLAMADA A LA FUNCIÓN
-crear_poligono_2d("Poligono2D", lados=6, radio=5)
+bpy.ops.object.delete() 
+LLAMADA A LA FUNCIÓN
+crear_poligono_2d("Poligono2D", lados=6, radio=5) 
 <img width="840" height="540" alt="image" src="https://github.com/user-attachments/assets/340001e0-3dda-49ae-b522-d759ca55a911" />
 
 
@@ -233,28 +229,25 @@ El patrón consiste en un círculo central rodeado por círculos de igual radio 
 Código: Flor de la Vida
 Ejecutar en el Script Editor de Blender:
 
+
 import bpy
 import math
- 
-# Limpiar escena
+Limpiar escena
 bpy.ops.object.select_all(action='SELECT')
-bpy.ops.object.delete()
- 
-# Parámetros de la figura
+bpy.ops.object.delete() 
+Parámetros de la figura
 radio = 3
 angulo_actual = 0
 paso_angular = 30  # Cada 30 grados para 12 círculos
- 
-# 1. Círculo Central
+ 1. Círculo Central
 bpy.ops.mesh.primitive_circle_add(radius=radio, location=(0, 0, 0), vertices=64)
- 
-# --- PATRÓN REPETITIVO CON WHILE ---
 while angulo_actual < 360:
     x = radio * math.cos(math.radians(angulo_actual))
     y = radio * math.sin(math.radians(angulo_actual))
     bpy.ops.mesh.primitive_circle_add(radius=radio, location=(x, y, 0), vertices=64)
     angulo_actual += paso_angular
 <img width="856" height="606" alt="image" src="https://github.com/user-attachments/assets/9286e755-e1e1-4fb7-b4cb-6ffe0a990470" />
+
 
 Análisis del Código
 El script comienza limpiando la escena con select_all y delete, lo que garantiza un entorno de trabajo limpio. Luego crea el círculo central en el origen. El bucle while itera desde angulo_actual = 0 hasta angulo_actual < 360, incrementando en paso_angular grados por iteración. En cada iteración, las ecuaciones x = radio·cos(θ) e y = radio·sin(θ) calculan el centro del siguiente círculo. La función primitive_circle_add crea el círculo y vertices=64 define la suavidad de la curva.
